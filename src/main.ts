@@ -15,14 +15,25 @@ async function bootstrap() {
       },
       consumer: {
         groupId: 'test1-client',
+        allowAutoTopicCreation: true,
       },
     },
   });
+
   if (process.env.NODE_ENV !== 'production') {
     const document = SwaggerModule.createDocument(app, swagger_config);
-    SwaggerModule.setup('OB-api', app, document);
+    SwaggerModule.setup('OB-api', app, document, {
+      swaggerOptions: {
+        displayOperationId: true,
+        filter: true,
+        showRequestDuration: true,
+        tagsSorter: 'alpha',
+        docExpansion: 'list',
+        operationsSorter: 'alpha',
+      },
+    });
   }
   await app.startAllMicroservices();
-  await app.listen(3000);
+  await app.listen(4000);
 }
 bootstrap();

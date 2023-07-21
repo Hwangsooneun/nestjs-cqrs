@@ -5,10 +5,11 @@ import { ProvidersModule } from 'src/providers/providers.module';
 import { CreateUserHandler } from './commands/create-user.command';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Users } from 'src/entities/users.entity';
+import { GetUserHandler } from './queries/get-user.query';
 
 @Module({
   imports: [CqrsModule, ProvidersModule, TypeOrmModule.forFeature([Users])],
   controllers: [UsersController],
-  providers: [CreateUserHandler],
+  providers: [CreateUserHandler, GetUserHandler],
 })
 export class UsersModule {}
