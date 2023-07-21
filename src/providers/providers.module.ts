@@ -1,12 +1,9 @@
 import { Module } from '@nestjs/common';
-import { UsersController } from './users.controller';
-import { UsersService } from './users.service';
+import { ProvidersService } from './providers.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { CqrsModule } from '@nestjs/cqrs';
 
 @Module({
   imports: [
-    CqrsModule,
     ClientsModule.register([
       {
         name: 'ob_test_kafka',
@@ -23,7 +20,7 @@ import { CqrsModule } from '@nestjs/cqrs';
       },
     ]),
   ],
-  controllers: [UsersController],
-  providers: [UsersService],
+  providers: [ProvidersService],
+  exports: [ProvidersService],
 })
-export class UsersModule {}
+export class ProvidersModule {}
